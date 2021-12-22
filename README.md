@@ -1,16 +1,18 @@
 # Bacapp
+
 Платформа объеденяющая клиентов и мастеров услуг в области красоты.
 
 ## Как развернуть проект
 
-- с клонировать репозиторий
-- скопировать файл .env.example в .env
-- настроить переменные в файле .env DB_HOST, DB_USERNAME, DB_PASSWORD
+-   с клонировать репозиторий
+-   скопировать файл .env.example в .env
+-   настроить переменные в файле .env DB_HOST, DB_USERNAME, DB_PASSWORD
 
 ## Установка зависимостей
-- в каталоге репозитория выполнить следующие команды
-- ```composer install```
-- ```php artisan migrate```
-- ```php artisan key:generate```
-- собрать nodejs зависимости через ```npm install``` и собрать фронт проекта через ```npm run dev```
-- добавить в файл hosts bacapp.loc 127.0.0.1
+
+-   в каталоге репозитория выполнить следующие команды
+    <!-- - ```composer install``` -->
+    <!-- - ```php artisan migrate``` -->
+-   `php artisan key:generate`
+    <!-- - собрать nodejs зависимости через ```npm install``` и собрать фронт проекта через ```npm run dev``` -->
+    <!-- - добавить в файл hosts bacapp.loc 127.0.0.1 -->

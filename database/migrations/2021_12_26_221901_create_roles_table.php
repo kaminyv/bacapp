@@ -17,7 +17,7 @@ class CreateRolesTable extends Migration
             $table->id();
             $table->string('role', 25);
             $table->string('name', 255)->comment('Название роли для представления');
-            $table->timestamp();
+            $table->timestamps();
         });
     }
 

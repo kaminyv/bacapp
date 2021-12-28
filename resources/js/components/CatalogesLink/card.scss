@@ -1,0 +1,64 @@
+.card {
+    width: 250px;
+    height: 313px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 1px solid #000000;
+    background-color: #33343a;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+    @media (min-width: 768px) {
+        width: 300px;
+        height: 413px;
+    }
+
+    &:hover {
+        background-color: #1d1d22;
+        transform: scale(1.1);
+        transition: transform 1s ease-in;
+
+        & .button--catalog {
+            display: block;
+        }
+    }
+
+    // &--women {
+    //     background-image: url("../images/promo/women.png");
+    // }
+
+    // &--coloring {
+    //     background-image: url("../images/promo/coloring.png");
+    // }
+
+    // &--mens {
+    //     background-image: url("../images/promo/women.png");
+    // }
+
+    // &--cosmetology {
+    //     background-position: 60px bottom, center bottom, 120px bottom;
+    //     background-size: 40px 210px, 100px 300px, 100px 215px;
+    //     background-image: url("../images/promo/cosmetology1.png"),
+    //         url("../images/promo/cosmetology.png"),
+    //         url("../images/promo/cosmetology2.png");
+
+    //     @media (min-width: 768px) {
+    //         background-size: 47px 228px, 113px 327px, 97px 228px;
+    //         background-position: 80px bottom, center bottom, 140px bottom;
+    //     }
+    // }
+
+    // &--eyelashes {
+    //     background-position: center;
+    //     background-image: url("../images/promo/eyelashes.png");
+    // }
+
+    // &--manicure {
+    //     background-position: center;
+    //     background-image: url("../images/promo/manicure.png");
+    // }
+}

@@ -1,0 +1,28 @@
+.recording {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin: 40px 0 0 0;
+    box-sizing: border-box;
+
+    @media (min-width: 768px) {
+        padding: 0 100px;
+        margin: 98px 0 0 0;
+        grid-template-columns: 1fr 336px 1fr;
+    }
+
+    @media (min-width: 1068px) {
+        padding: 0 150px;
+    }
+
+    &__img {
+        width: 168px;
+        height: 244px;
+
+        @media (min-width: 1068px) {
+            width: 336px;
+            height: 488px;
+        }
+    }
+}

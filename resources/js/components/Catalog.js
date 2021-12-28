@@ -1,17 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import Footer from "./Footer/Footer";
+import Header from "./Header/Header";
+import Promo from "./Promo/Promo";
+import Cataloges from "./Cataloges/Catologes";
+import Recording from "./Recording/Recording";
 
 function Catalog() {
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card text-center">
-                        <div className="card-header"><h2>React компонент каталог мастеров (Главная).</h2></div>
-                        <div className="card-body">Это тестовый компонент главной страницы для вывода мастеров.</div>
-                    </div>
-                </div>
-            </div>
+        <div className="container">
+            <Header />
+            <main class="main">
+                <Promo />
+                <Cataloges />
+                <Recording />
+            </main>
+            <Footer />
         </div>
     );
 }
@@ -19,6 +23,6 @@ function Catalog() {
 export default Catalog;
 
 // DOM element
-if (document.getElementById('catalog')) {
-    ReactDOM.render(<Catalog />, document.getElementById('catalog'));
+if (document.getElementById("catalog")) {
+    ReactDOM.render(<Catalog />, document.getElementById("catalog"));
 }

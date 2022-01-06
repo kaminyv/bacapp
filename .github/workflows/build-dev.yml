@@ -30,10 +30,10 @@ jobs:
         run: npm run prod
 
       - name: Upload to VDS
-        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . bacapp@kaminyv.fvds.ru:/var/www/html/bacapp.ru
+        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . bacapp@bacapp.ru:/var/www/html/bacapp.ru
       
       - name: .env files on VDS
-        run: ssh -i $HOME/.ssh/key bacapp@kaminyv.fvds.ru "cp envs/.env.dev /var/www/html/bacapp.ru/.env | php /var/www/html/bacapp.ru/artisan migrate --force"
+        run: ssh -i $HOME/.ssh/key bacapp@bacapp.ru "cp envs/.env.dev /var/www/html/bacapp.ru/.env | php /var/www/html/bacapp.ru/artisan migrate --force"
 
       - name: fix files rights
-        run: ssh -i $HOME/.ssh/key bacapp@kaminyv.fvds.ru "chmod 775 -R /var/www/html/bacapp.ru/storage | chmod 775 -R /var/www/html/bacapp.ru/bootstrap/cache"
+        run: ssh -i $HOME/.ssh/key bacapp@bacapp.ru "chmod 775 -R /var/www/html/bacapp.ru/storage | chmod 775 -R /var/www/html/bacapp.ru/bootstrap/cache"

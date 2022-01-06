@@ -2,7 +2,7 @@ name: Bacapp CI
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   laravel-tests:

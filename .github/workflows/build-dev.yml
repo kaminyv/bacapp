@@ -1,0 +1,36 @@
+name: build dev
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  Build-And-Upload-Dev:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: '8.0'
+
+      - uses: actions/checkout@v2
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.DEPLOY_SERVER_KEY }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
+
+      - name: Install PHP Dependencies
+        run: composer install --optimize-autoloader --no-dev
+
+      - name: Install JS Dependencies
+        run: npm ci
+
+      - name: Build Production
+        run: npm run prod
+
+      - name: Upload to VDS
+        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . bacapp@bacapp.ru:/var/www/html/bacapp.ru
+
+      - name: fix files rights
+        run: ssh -i $HOME/.ssh/key builder@thisdev.ru "chmod 775 -R /var/www/html/bacapp.ru/storage | chmod 775 -R /var/www/bacapp.ru/bootstrap/cache"

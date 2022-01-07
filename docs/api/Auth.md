@@ -59,7 +59,7 @@
 }
 ```
 
-## */api/auth/logoutall*
+## */api/auth/logout-all*
 Выход пользователя.
 
 Удаляются token на для всех сеанса.

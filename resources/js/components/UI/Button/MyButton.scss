@@ -1,0 +1,23 @@
+.button {
+    padding: 0;
+    border: none;
+    background-color: #f4ad7b;
+    width: 100%;
+    height: 50px;
+    &:hover {
+        background-color: #94561c;
+        box-shadow: 9px -9px 10px #828282;
+        transition: background-color 0.5s ease-in;
+
+        & .button__text {
+            color: #ffffff;
+        }
+    }
+    // &__text {
+    //     font-weight: bold;
+    //     font-size: 15px;
+    //     line-height: 18px;
+    //     color: #282930;
+    //     text-transform: uppercase;
+    // }
+}

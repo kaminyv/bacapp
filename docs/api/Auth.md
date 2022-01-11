@@ -11,7 +11,7 @@
     "name" : "string",
     "email" : "string",
     "password" : "string",
-    "role_name" : "string"
+    "role_id" : "int"
 }
 ```
 **Response:**
@@ -31,7 +31,7 @@
 {
     "email" : "string",
     "password" : "string",
-    "role_name" : "string"
+    "role_id" : "int"
 }
 ```
 

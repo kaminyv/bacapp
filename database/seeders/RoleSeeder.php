@@ -19,24 +19,26 @@ class RoleSeeder extends Seeder
 
     private function newData()
     {
-        $data[1] = [
-            'role' => 'admin',
-            'name' => 'Администратор',
-            'created_at' => now(),
-            'updated_at' => now(),
+        return [
+            [
+                'role' => 'admin',
+                'name' => 'Администратор',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'role' => 'master',
+                'name' => 'Мастер',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'role' => 'user',
+                'name' => 'Пользователь',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ];
-        $data[2] = [
-            'role' => 'master',
-            'name' => 'Мастер',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-        $data[3] = [
-            'role' => 'user',
-            'name' => 'Пользователь',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-        return $data;
     }
+
 }

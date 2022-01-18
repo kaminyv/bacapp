@@ -27,14 +27,14 @@ class AuthRepository implements AuthRepositoryInterface
      */
     public function getTokenByUser(Request $request, $user): string
     {
-        return $user->createToken($request->input('role_id'))->plainTextToken;
+        return $user->createToken($user->id)->plainTextToken;
     }
 
     public function getVerifiedUser(TokenRequest $request, User $user)
     {
         $request->validated();
-        $user = $user->getUserByEmail($request->email);
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        $user = $user->getUserByEmail($request->input('email'));
+        if (!$user || !Hash::check($request->input('password'), $user->password)) {
             return null;
         }
         return $user;

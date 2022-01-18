@@ -1,55 +1,54 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../context';
-import MyLabel from '../UI/Label/MyLabel';
+import React, { useContext, useRef, useState } from 'react'
+// import { AuthContext } from '../context'
+import './../../../sass/style.scss'
+import { Form, Button, FormControl } from 'react-bootstrap'
 
-import MyButton from '../UI/Button/MyButton';
-import MyInput from '../UI/Input/MyInput';
-import './../../../sass/style.scss';
 
 const Login = () => {
-    const { isAuth, setIsAuth } = useContext(AuthContext);
-    const logout = () => {
-        localStorage.removeItem({ name: '', password: '' });
-    };
-    const [login, setLogin] = useState({ name: '', password: '' });
-    const checkLogin = (e) => {
-        e.preventDefault();
-        const NewUser = { ...login, ...password };
-        setLogin(NewUser);
-        console.log(NewUser);
-        setIsAuth(NewUser);
-        console.log(isAuth);
+    const [users, setUsers] = useState([
+        // { id: 1, name: 'Anna', password: 1 },
+        // { id: 2, name: 'Ivan', password: 1 },
+    ])
+    const [user, setUser] = useState({ name: '', password: ''})
+
+    const utName = () => {
+        console.log("utName")
     }
+    const checkName = (e) => {
+         e.preventDefault();
+        console.log("checkName")
+        setUsers([...users, {...user, id: Date.now()}])
+        setUser({ name: '', password: ''})
+        console.log(users)
+        console.log(user)
 
+    }
     return (
-        <div className='login'>
-            <h1 className='login__title'>Войти в приложение: </h1>
-            <form>
-                <MyLabel htmlFor='master'>Логин:</MyLabel>
-                <MyInput
-                    value={login.name}
-                    onChange={e => setLogin({ ...login, name: e.target.value })}
-                    id='master'
-                    className='input'
+        <Form className='mt-3 container'>
+            <Form.Group className='mb-3' controlId='name'>
+                <Form.Label >Логин:</Form.Label>
+                <Form.Control
+                    size="lg"
+                    value={user.name}
+                    onChange={(e) => setUser({...user, name: e.target.value})}
                     type='text'
-                    placeholder='Введите имя'
+                    placeholder="Введите имя"
                 />
-                <MyLabel htmlFor='password'>Пароль:</MyLabel>
-                <MyInput
-                    value={login.password}
-                    onChange={e => setLogin({ ...login, password: e.target.value })}
-                    id='password'
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='password'>
+                <Form.Label>Пароль:</Form.Label>
+                <Form.Control
+                    size="lg"
+                    value={user.password}
                     type='password'
-                    className='input'
                     placeholder='Введите пароль'
+                    onChange={e => setUser({...user, password: e.target.value})}
                 />
-                <div className='login__button'>
-                    <MyButton onClick={checkLogin} className='button button--promo'>Войти</MyButton>
-                    <MyButton onClick={logout} className='button button--promo'>Выйти</MyButton>
-                </div>
-            </form>
-        </div>
-    );
-};
-
+            </Form.Group>
+            <Button onClick={checkName} className="mx-3" size="lg" variant="secondary" type='submit'> Войти </Button>
+            <Button onClick={utName} className="mx-3" size='lg' variant='secondary' type='reset'> Выйти </Button>
+        </Form>
+    )
+}
 export default Login;
+

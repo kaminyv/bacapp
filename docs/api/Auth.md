@@ -11,7 +11,7 @@
     "name" : "string",
     "email" : "string",
     "password" : "string",
-    "is_master" : "int"
+    "is_master" : "boolean"
 }
 ```
 **Response:**

@@ -3,67 +3,59 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\TokenRequest;
+use App\Interfaces\AuthRepositoryInterface;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+
+    /** @var AuthRepositoryInterface $repository */
+    private $repository;
+
+    public function __construct(AuthRepositoryInterface $authRepository)
+    {
+        $this->repository = $authRepository;
+    }
+
     /**
      * Register
      * Регистрация нового пользователя.
      *
-     * @param Request $request
+     * @param RegisterRequest $request
+     * @param User $user
      * @return JsonResponse
      */
-    public function register(Request $request) : JsonResponse
+    public function register(RegisterRequest $request, User $user) : JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
-            'role_id' => ['required', 'string', 'exists:roles,id']
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
-        }
+        $this->repository->savingUser($request, $user);
+        $token = $this->repository->getTokenByUser($request, $user);
 
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-        $user = User::query()->create($input);
-
-        $token = $user->createToken($request->input('role_id'))->plainTextToken;
-
-        return response()->json(['token' => $token], 200);
+        return response()->json(['token' => $token]);
     }
 
     /**
      * Функция запроса токена (если пользователь уже существует)
      *
-     * @param Request $request
+     * @param TokenRequest $request
+     * @param User $user
      * @return JsonResponse
      */
-    public function token(Request $request) : JsonResponse
+    public function token(TokenRequest $request, User $user) : JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'email' => ['required', 'string', 'email', 'max:255', 'exists:users,email'],
-            'password' => ['required', 'string', 'min:8'],
-            'role_id' => ['required', 'string', 'exists:roles,id'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+        $user = $this->repository->getVerifiedUser($request, $user);
+        if (!$user) {
+            return response()->json([
+                'errors' => array(__('Введены неверные данные'))
+            ], 422);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $token = $this->repository->getTokenByUser($request, $user);
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => 'Введены неверные данные'], 401);
-        }
-
-        return response()->json(['token' => $user->createToken($request->input('role_id'))->plainTextToken]);
+        return response()->json(['token' => $token]);
     }
 
     /**
@@ -95,4 +87,5 @@ class AuthController extends Controller
             'message' => 'Токены для всех сеансов отозваны'
         ]);
     }
+
 }

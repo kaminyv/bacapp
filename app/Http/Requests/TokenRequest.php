@@ -30,7 +30,6 @@ class TokenRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email', 'max:255', 'exists:users,email'],
             'password' => ['required', 'string', 'min:8'],
-            'role_id' => ['required', 'string', 'exists:roles,id'],
         ];
     }
 
@@ -39,7 +38,6 @@ class TokenRequest extends FormRequest
         return [
             'name' => __('Имя пользователя'),
             'password' => __('Пароль'),
-            'role_id' => __('Роль')
         ];
     }
 

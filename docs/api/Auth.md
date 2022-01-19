@@ -11,7 +11,7 @@
     "name" : "string",
     "email" : "string",
     "password" : "string",
-    "role_id" : "int"
+    "is_master" : "boolean"
 }
 ```
 **Response:**
@@ -30,8 +30,7 @@
 ```json
 {
     "email" : "string",
-    "password" : "string",
-    "role_id" : "int"
+    "password" : "string"
 }
 ```
 

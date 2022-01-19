@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'role_id' => ['required', 'string', 'exists:roles,id']
+            'is_master' => ['boolean',]
         ];
     }
 
@@ -41,7 +41,7 @@ class RegisterRequest extends FormRequest
             'name' => __('Имя пользователя'),
             'email' => __('Адрес электронной почты'),
             'password' => __('Пароль'),
-            'role_id' => __('Роль')
+            'is_master' => __('Мастер')
         ];
     }
 

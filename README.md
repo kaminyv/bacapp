@@ -10,12 +10,14 @@
 
 ## Установка зависимостей
 
--   в каталоге репозитория выполнить следующие команды
--   `composer install`
--   `php artisan migrate`
--   `php artisan key:generate`
--   собрать nodejs зависимости через `npm install` и собрать фронт проекта через `npm run dev`
--   добавить в файл hosts bacapp.loc 127.0.0.1
+- в каталоге репозитория выполнить следующие команды
+- `composer install`
+- `php artisan migrate:refresh`
+- `php artisan key:generate`
+- `php artisan storage:link`
+- если требуется нужно сделать начальное заполнение `php artisan db:seed`
+- собрать nodejs зависимости через `npm install` и собрать фронт проекта через `npm run dev`
+- добавить в файл hosts bacapp.loc 127.0.0.1
 
 ## Работа с GIT
 

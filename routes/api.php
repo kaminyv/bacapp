@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CatalogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,8 @@ use App\Http\Controllers\API\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/catalog', [CatalogController::class, 'index']);
+
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function ()
 {
     Route::post('/register', [AuthController::class, 'register']);
@@ -23,5 +26,4 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function ()
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/logout-all', [AuthController::class, 'logoutAll']);
     });
-
 });

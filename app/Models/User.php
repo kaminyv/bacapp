@@ -51,4 +51,11 @@ class User extends Authenticatable
         return self::query()->where('email', $email)->first();
     }
 
+    /**
+     * Получить мастерскую
+     */
+    public function workshop() {
+            return $this->hasOne(Workshop::class);
+    }
+
 }

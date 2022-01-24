@@ -33,7 +33,7 @@ jobs:
         run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . bacapp@bacapp.ru:/var/www/html/bacapp.ru
       
       - name: .env files on VDS
-        run: ssh -i $HOME/.ssh/key bacapp@bacapp.ru "cp env/.env.dev /var/www/html/bacapp.ru/.env | php /var/www/html/bacapp.ru/artisan migrate --force"
+        run: ssh -i $HOME/.ssh/key bacapp@bacapp.ru "cp env/.env.dev /var/www/html/bacapp.ru/.env | php /var/www/html/bacapp.ru/artisan migrate:fresh --seed"
 
       - name: fix files rights
         run: ssh -i $HOME/.ssh/key bacapp@bacapp.ru "chmod 775 -R /var/www/html/bacapp.ru/storage | chmod 775 -R /var/www/html/bacapp.ru/bootstrap/cache"

@@ -16,6 +16,7 @@ use App\Http\Controllers\API\CatalogController;
 |
 */
 Route::get('/catalog', [CatalogController::class, 'index']);
+Route::get('/catalog/{workshop}', [CatalogController::class, 'show']);
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function ()
 {

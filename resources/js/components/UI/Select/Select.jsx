@@ -6,7 +6,7 @@ const Select = ({ options, defaultValue, value, onChange }) => {
         <Form.Select
             size="lg"
             value={value}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={event => onChange(event.target.value)}
         >
             <option value="" disabled>
                 {defaultValue}

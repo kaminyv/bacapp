@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react'
+import { Container, Button, Form } from 'react-bootstrap'
 import '../../../sass/style.scss'
-import CatalogList from '../catalogs/CatalogList';
-import CatalogFilter from '../catalogs/CatalogFilter';
-import BacappApi from '../../API/BacappApi';
-import { useCatalog } from '../../hooks/useCatalog';
-import { useFetching } from '../../hooks/useFetching';
+import CatalogList from '../catalogs/CatalogList'
+import CatalogFilter from '../catalogs/CatalogFilter'
+import BacappApi from './../../API/BacappApi'
+import { useCatalog } from '../../hooks/useCatalog'
+import { useFetching } from '../../hooks/useFetching'
 
 
 const Main = () => {

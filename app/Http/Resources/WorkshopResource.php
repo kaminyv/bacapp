@@ -4,17 +4,17 @@ namespace App\Http\Resources;
 
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\UserResource;
+use Illuminate\Http\Request;
 
 class WorkshopResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  Request  $request
+     * @return array
      */
-    public function toArray($request)
+    public function toArray($request) : array
     {
         return [
             'id' => $this['id'],
@@ -24,7 +24,7 @@ class WorkshopResource extends JsonResource
             'cover' => $this['cover'],
             'phone' => $this['phone'],
             'rating' => $this['rating'],
-            'service' => ServiseResource::collection($this->service),
+            'service' => ServiceResource::collection($this->service),
         ];
     }
 }

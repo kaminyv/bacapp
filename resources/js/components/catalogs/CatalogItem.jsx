@@ -1,13 +1,14 @@
-import React,{useState} from 'react';
-import { Card, Button } from 'react-bootstrap';
-import CatalogServece from './CatalogServece';
+import React  from 'react';
+import { Card, Button,ListGroup } from 'react-bootstrap';
+// import CatalogServece from './CatalogServece';
 
 const CatalogItem = (props) => {
     //  console.log(props);
 
     return (
+        <ListGroup.Item as="li" className='card__item'>
         <Card bg='dark' text='white' className='catalog'>
-            {/* <Card.Img variant='top' src= {`http://bacapp.loc/${props.catalog.master.avatar}`} /> */}
+            {/* <Card.Img variant='top' src= {`http://bacapp.loc/${props.catalog.cover}`} /> */}
             <Card.Body >
                 <Card.Title>
                     <svg
@@ -57,11 +58,11 @@ const CatalogItem = (props) => {
                     </svg>
                     {props.catalog.rating}
                 </Card.Text>
-                {/* <Button variant='light' >Смотреть предложение</Button> */}
+                <Button variant='light' className='button--catalog mx-2'>Смотреть предложение</Button>
             </Card.Body>
-            <CatalogServece service={props.catalog.service} key={catalog.id }/>
+            {/* <CatalogServece service={props.catalog.service} key={catalog.id }/> */}
         </Card>
-
+        </ListGroup.Item>
     );
 };
 export default CatalogItem;

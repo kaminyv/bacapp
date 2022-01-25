@@ -1,46 +1,40 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Button, Form } from 'react-bootstrap';
 import '../../../sass/style.scss'
 import CatalogList from '../catalogs/CatalogList';
 import CatalogFilter from '../catalogs/CatalogFilter';
-// import Modals from '../UI/Modal/Modal';
-import axios from 'axios';
-import BacappApi from '../../api/BacappApi';
+import BacappApi from '../../API/BacappApi';
+import { useCatalog } from '../../hooks/useCatalog';
+import { useFetching } from '../../hooks/useFetching';
+
 
 const Main = () => {
     const [catalogs, setCatalogs] = useState([])
+    const [filter, setFilter] = useState({ sort: '', query: '' });
+    const sortedSeachedCatalag = useCatalog(catalogs, filter.sort, filter.query)
+
     useEffect(() => {
         fetchCatalog()
     }, [])
-    async function fetchCatalog() {
-        const catalogs = await BacappApi.getAll()
-        setCatalogs(catalogs)
-    }
-    // function MyVerticallyCenteredModal(props) {
-    //     return <Modals {...props} />;
-    // }
-    // const [modalShow, setModalShow] = useState(false);
-    const [filter, setFilter] = useState({ sort: '', query: '' });
 
-    const sortedCatalog = useMemo(() => {
-        if (filter.sort) {
-            return [...catalogs].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-        }
-        return catalogs
-    }, [filter.sort, catalogs])
-    const sortedSeachedCatalag = useMemo(() => {
-        return sortedCatalog.filter(catalogs =>
-            catalogs.master.name.toLowerCase().includes(filter.query.toLowerCase())
-            || catalogs.city.toLowerCase().includes(filter.query.toLowerCase())
-            || catalogs.address.toLowerCase().includes(filter.query.toLowerCase())
+    const [fetchCatalog, isLoading, catalogError] = useFetching(async() => {
+        // const catalogs = await BacappApi.getAll()
+        // setCatalogs(catalogs)
+        const responce = await BacappApi.getAll()
+        setCatalogs(responce.data)
+    })
 
-        )
-    }, [filter.query, sortedCatalog])
 
     return (
-        <Container>
+        <Container fluid as="main">
             <CatalogFilter filter={filter} setFilter={setFilter} />
-            <CatalogList title={"Онлайн запись в вашем городе"} catalogs={sortedSeachedCatalag} />
+            {catalogError &&
+            <h1>Произошла ошибка ${catalogError}</h1>
+            }
+            {isLoading
+                ? <h1>Идеет загрузка...</h1>
+                : <CatalogList title={"Онлайн запись в вашем городе"} catalogs={sortedSeachedCatalag} />
+            }
         </Container>
     )
 }

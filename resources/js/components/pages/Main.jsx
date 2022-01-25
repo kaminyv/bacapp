@@ -3,7 +3,7 @@ import { Container, Button, Form } from 'react-bootstrap'
 import '../../../sass/style.scss'
 import CatalogList from '../catalogs/CatalogList'
 import CatalogFilter from '../catalogs/CatalogFilter'
-import BacappApi from './../../API/BacappApi'
+import BacappApi from '../../api/BacappApi'
 import { useCatalog } from '../../hooks/useCatalog'
 import { useFetching } from '../../hooks/useFetching'
 

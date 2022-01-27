@@ -6,8 +6,8 @@ const CatalogItem = (props) => {
     //  console.log(props);
 
     return (
-        <ListGroup.Item as="li" className='card__item'>
-            <Card bg='dark' text='white' className='catalog'>
+        <ListGroup.Item as="li">
+            <Card bg='dark' text='white'>
                 <Card.Img className='catalog__img'
                     variant='top'
                     src={`/storage/${props.catalog.cover}`} />
@@ -59,7 +59,7 @@ const CatalogItem = (props) => {
                         </svg>
                         {props.catalog.rating}
                     </Card.Text>
-                    <Button variant='light' className='button--catalog mx-2'>Смотреть предложение</Button>
+                    <Button variant='secondary' className=' mx-2'>Смотреть предложение</Button>
                 </Card.Body>
                 {/* <CatalogServece service={props.catalog.service} key={catalog.id }/> */}
             </Card>

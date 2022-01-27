@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Navbar, Container, Nav, Button, Row } from 'react-bootstrap';
 import Modals from './../UI/Modal/Modal'
 
@@ -27,10 +27,10 @@ const Header = () => {
                         <Button
                             className='mx-2'
                             variant='secondary'
-                            onClick={() => setModalShow(true)}
-                        >
+                            onClick={() => setModalShow(true)}>
                             Вход
                         </Button>
+
                     </Container>
                 </Navbar>
             </Row>

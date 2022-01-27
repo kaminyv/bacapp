@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Form } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import '../../../sass/style.scss'
 import CatalogList from '../catalogs/CatalogList'
 import CatalogFilter from '../catalogs/CatalogFilter'
 import BacappApi from '../../api/BacappApi'
 import { useCatalog } from '../../hooks/useCatalog'
 import { useFetching } from '../../hooks/useFetching'
-
+import Header from '../catalogs/Header'
+import Footer from '../catalogs/Footer'
 
 const Main = () => {
     const [catalogs, setCatalogs] = useState([])
@@ -17,25 +18,23 @@ const Main = () => {
         fetchCatalog()
     }, [])
 
-    const [fetchCatalog, isLoading, catalogError] = useFetching(async() => {
-        // const catalogs = await BacappApi.getAll()
-        // setCatalogs(catalogs)
+    const [fetchCatalog, isLoading, catalogError] = useFetching(async () => {
         const responce = await BacappApi.getAll()
         setCatalogs(responce.data)
     })
-
-
-    return (
+    return (<>
+        <Header />
         <Container fluid as="main">
             <CatalogFilter filter={filter} setFilter={setFilter} />
             {catalogError &&
-            <h1>Произошла ошибка ${catalogError}</h1>
+                <h1>Произошла ошибка ${catalogError}</h1>
             }
             {isLoading
                 ? <h1>Идеет загрузка...</h1>
                 : <CatalogList title={"Онлайн запись в вашем городе"} catalogs={sortedSeachedCatalag} />
             }
         </Container>
-    )
+        <Footer />
+    </>)
 }
 export default Main

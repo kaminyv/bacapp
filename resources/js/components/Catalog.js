@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Footer from './pages/Footer';
-import Header from './pages/Header';
-import Main from './pages/Main'
+import Main from './pages/Main';
+
 
 function Catalog() {
-    return (<>
-        <Header/>
-        <Main />
-        <Footer/>
+    return (
+        <>
+            <Main />
         </>
-        );
-    }
-    export default Catalog;
+    );
+}
+export default Catalog;
 
 // DOM element
 if (document.getElementById('catalog')) {

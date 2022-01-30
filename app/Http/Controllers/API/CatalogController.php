@@ -5,25 +5,25 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Workshop;
 use App\Http\Resources\WorkshopResource;
-use Illuminate\Http\JsonResponse;
 use \Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Http\Resources\Json\ResourceResponse;
 
 class CatalogController extends Controller
 {
     /**
+     * Index
      * Выводит мастеров
      *
      * @return AnonymousResourceCollection
      */
     public function index() : AnonymousResourceCollection
     {
-        return WorkshopResource::collection(Workshop::query()->paginate(10));
+        return WorkshopResource::collection(Workshop::query()->paginate(9));
     }
 
     /**
-     * Выводит мастерскую
+     * Show
+     * Выводит мастерскую по id
+     * @param Workshop $workshop
      *
      * @return WorkshopResource
      */
@@ -31,5 +31,4 @@ class CatalogController extends Controller
     {
         return new WorkshopResource($workshop);
     }
-
 }

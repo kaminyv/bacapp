@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\User;
 
+use App\Http\Resources\ServiceResource;
+use App\Models\Service;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ServiseResource extends JsonResource
+class EntryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +18,8 @@ class ServiseResource extends JsonResource
     {
         return [
             'id' => $this['id'],
-            'name' => $this['name'],
-            'price' => $this['price'],
+            'service' => new ServiceResource(Service::query()->findOrFail($this['service_id'])),
+            'date' => $this['date'],
             'time' => $this['time'],
         ];
     }

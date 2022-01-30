@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CatalogController;
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\User\EntryController as UserEntryController;
+use App\Http\Controllers\API\User\ProfileController as UserProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +30,14 @@ Route::prefix('auth')->group(function() {
 });
 
 Route::prefix('user')->middleware('auth:sanctum')->group(function() {
-    Route::get('/', [UserController::class, 'index']);
+
+    Route::prefix('profile')->group(function() {
+        Route::get('/', [UserProfileController::class, 'index']);
+    });
+
+    Route::prefix('entry')->group(function() {
+       Route::post('/', [UserEntryController::class, 'store']);
+       Route::get('/past', [UserEntryController::class, 'past']);
+       Route::get('/current', [UserEntryController::class, 'current']);
+    });
 });

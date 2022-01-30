@@ -58,4 +58,10 @@ class User extends Authenticatable
             return $this->hasOne(Workshop::class);
     }
 
+    /**
+     * Получить записи
+     */
+    public function entry() {
+        return $this->hasMany(Entry::class);
+    }
 }

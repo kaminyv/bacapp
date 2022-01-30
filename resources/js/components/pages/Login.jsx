@@ -1,50 +1,58 @@
-import React, {  useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
-
+import React, { useState } from 'react'
+import { Form, Button, Card, Row } from 'react-bootstrap'
+import BacappApi from '../../api/BacappApi'
+import { Link } from "react-router-dom";
+import Footer from '../catalogs/Footer';
 const Login = () => {
-    const [users, setUsers] = useState([
-        // { id: 1, name: 'Anna', password: 1 },
-        // { id: 2, name: 'Ivan', password: 1 },
-    ])
-    const [user, setUser] = useState({ name: '', password: ''})
-
-    const utName = () => {
-        console.log("utName")
+    const [user, setUser] = useState({ email: '', password: '' })
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+    };
+    const signIn = (e) => {
+        e.preventDefault()
+        BacappApi.postToken(user)
+        setUser({ email: '', password: '' })
     }
-    const checkName = (e) => {
-        e.preventDefault();
-         console.log("checkName")
-        setUsers([...users, {...user, id: Date.now()}])
-        setUser({ name: '', password: ''})
-        // console.log(users)
-        // console.log(user)
-
-    }
-    return (
-        <Form className='mt-3 container' onSubmit={(e) => handleSubmit(e)}>
-            <Form.Group className='mb-3' controlId='name'>
-                <Form.Label >Логин:</Form.Label>
-                <Form.Control
-                    size="lg"
-                    value={user.name}
-                    onChange={(e) => setUser({...user, name: e.target.value})}
-                    type='text'
-                    placeholder="Введите имя"
-                />
-            </Form.Group>
-            <Form.Group className='mb-3' controlId='password'>
-                <Form.Label>Пароль:</Form.Label>
-                <Form.Control
-                    size="lg"
-                    value={user.password}
-                    type='password'
-                    placeholder='Введите пароль'
-                    onChange={e => setUser({...user, password: e.target.value})}
-                />
-            </Form.Group>
-            <Button onClick={checkName} className="mx-3" size="lg" variant="secondary" type='submit'> Войти </Button>
-            <Button onClick={utName} className="mx-3" size='lg' variant='secondary' type='reset'> Выйти </Button>
-        </Form>
+    // const signOn = (e) => {
+    //     e.preventDefault()
+    //     console.log('clik')
+    //     // BacappApi.postLogout(user)
+    //     setUser({ email: '', password: '' })
+    // }
+    return (<>
+        <Card className='p-5'>
+            <h2 className='m-auto'>Авторизация</h2>
+            <Form className='mt-3 container d-flex flex-column'>
+                <Form.Group className="mb-3" controlId="email">
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                        value={user.email}
+                        onChange={handleInput}
+                        name='email'
+                        type="email"
+                        placeholder="Введите email" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="password">
+                    <Form.Label>Пароль:</Form.Label>
+                    <Form.Control
+                        value={user.password}
+                        onChange={handleInput}
+                        name='password'
+                        type="password"
+                        placeholder="Введите пароль" />
+                </Form.Group>
+                <Row className='my-3'>
+                    <div>Нет аккаунта?
+                        <Link to="/registre" className="link-success px-3">Зарегистрируйтесь</Link>
+                    </div>
+                </Row>
+                <Button onClick={signIn} className="mx-3 " variant="secondary" type='submit'> Войти </Button>
+            </Form>
+        </Card>
+        <Footer />
+    </>
     )
 }
 export default Login;
+

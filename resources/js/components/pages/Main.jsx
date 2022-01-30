@@ -6,7 +6,6 @@ import CatalogFilter from '../catalogs/CatalogFilter'
 import BacappApi from '../../api/BacappApi'
 import { useCatalog } from '../../hooks/useCatalog'
 import { useFetching } from '../../hooks/useFetching'
-import Header from '../catalogs/Header'
 import Footer from '../catalogs/Footer'
 
 const Main = () => {
@@ -23,7 +22,6 @@ const Main = () => {
         setCatalogs(responce.data)
     })
     return (<>
-        <Header />
         <Container fluid as="main">
             <CatalogFilter filter={filter} setFilter={setFilter} />
             {catalogError &&

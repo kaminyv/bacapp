@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Form, Button, Card, Row } from 'react-bootstrap'
 import BacappApi from '../../api/BacappApi'
-
+import { Link } from "react-router-dom";
+import Footer from '../catalogs/Footer';
 const Login = () => {
     const [user, setUser] = useState({ email: '', password: '' })
     const handleInput = (e) => {
@@ -9,11 +10,17 @@ const Login = () => {
         setUser({ ...user, [name]: value });
     };
     const signIn = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         BacappApi.postToken(user)
         setUser({ email: '', password: '' })
     }
-    return (
+    // const signOn = (e) => {
+    //     e.preventDefault()
+    //     console.log('clik')
+    //     // BacappApi.postLogout(user)
+    //     setUser({ email: '', password: '' })
+    // }
+    return (<>
         <Card className='p-5'>
             <h2 className='m-auto'>Авторизация</h2>
             <Form className='mt-3 container d-flex flex-column'>
@@ -37,19 +44,14 @@ const Login = () => {
                 </Form.Group>
                 <Row className='my-3'>
                     <div>Нет аккаунта?
-                        <Button
-                            className='mx-2'
-                            variant='secondary'
-                        // onClick={ }
-                        >Зарегистрируйтесь
-                        </Button>
+                        <Link to="/registre" className="link-success px-3">Зарегистрируйтесь</Link>
                     </div>
                 </Row>
                 <Button onClick={signIn} className="mx-3 " variant="secondary" type='submit'> Войти </Button>
             </Form>
         </Card>
-
-
+        <Footer />
+    </>
     )
 }
 export default Login;

@@ -19,7 +19,7 @@ class CheckIsMaster
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::user()['is_master']) {
-            return response()->json(['messege' => 'User not master.'], 422);
+            return response()->json(['messege' => 'User not master.'], 401);
         }
         return $next($request);
     }

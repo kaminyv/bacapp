@@ -1,18 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Main from './pages/Main';
+import Login from './pages/Login';
+import Registre from './pages/Registre'
+import Layout  from './pages/Layout'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function User() {
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card text-center">
-                        <div className="card-header"><h2>React компонент страницы пользователя клиент.</h2></div>
-                        <div className="card-body">Это тестовый компонент страницы пользователя клиент.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Main />} />
+                <Route path="registre" element={<Registre />} />
+                <Route path="login" element={<Login />} />
+            </Route>
+        </Routes>
+    </BrowserRouter>
     );
 }
 

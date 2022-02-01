@@ -10,7 +10,7 @@ const CatalogItem = (props) => {
             <Card bg='dark' text='white'>
                 <Card.Img className='catalog__img'
                     variant='top'
-                    src={`/storage/${props.catalog.cover}`} />
+                    src={`${props.catalog.cover}`} />
                 <Card.Body >
                     <Card.Title>
                         <svg

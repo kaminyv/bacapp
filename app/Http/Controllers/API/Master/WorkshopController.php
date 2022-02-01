@@ -5,13 +5,21 @@ namespace App\Http\Controllers\API\Master;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateWorkshopRequest;
 use App\Http\Requests\StoreWorkshopRequest;
+use App\Interfaces\WorkshopRepositoryInterface;
 use App\Models\Workshop;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class WorkshopController extends Controller
 {
+    /** @var WorkshopRepositoryInterface $repository */
+    private $repository;
+
+    public function __construct(WorkshopRepositoryInterface $workshopRepository)
+    {
+        $this->repository = $workshopRepository;
+    }
+
     /**
      * Index
      * Выводит мастерскую.
@@ -41,9 +49,7 @@ class WorkshopController extends Controller
         $validated = $request->all();
 
         if ($request->file('cover')) {
-            $path = Storage::put('public', $request->file('cover'));
-            $url = Storage::url($path);
-            $validated['cover'] = $url;
+            $validated['cover'] = $this->repository->putImage($request);
         }
 
         $validated['user_id'] = Auth::id();
@@ -69,9 +75,7 @@ class WorkshopController extends Controller
         $validated = $request->all();
 
         if ($request->file('cover')) {
-            $path = Storage::put('public', $request->file('cover'));
-            $url = Storage::url($path);
-            $validated['cover'] = $url;
+            $validated['cover'] = $this->repository->putImage($request);
         }
 
         $workshop->fill($validated)->save();

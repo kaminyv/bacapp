@@ -20,7 +20,7 @@ class WorkshopFactory extends Factory
             'city' => $this->faker->city,
             'address' => $this->faker->streetAddress,
             'description' => $this->faker->realText(Rand(20, 100)),
-            'cover' => $this->faker->image('public/storage',640,480, null, false),
+            'cover' => '/storage/'.$this->faker->image('public/storage',640,480, null, false),
             'phone' => $this->faker->numerify('79#########'),
             'rating' => $this->faker->numberBetween(1, 5),
         ];

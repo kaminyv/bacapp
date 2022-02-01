@@ -4,6 +4,8 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CatalogController;
 use App\Http\Controllers\API\User\EntryController as UserEntryController;
 use App\Http\Controllers\API\User\ProfileController as UserProfileController;
+use App\Http\Controllers\API\Master\ServiceController as MasterServiceController;
+use App\Http\Controllers\API\Master\WorkshopController as MasterWorkshopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +42,15 @@ Route::prefix('user')->middleware('auth:sanctum')->group(function() {
        Route::get('/past', [UserEntryController::class, 'past']);
        Route::get('/current', [UserEntryController::class, 'current']);
     });
+});
+
+Route::prefix('master')->middleware(['isMaster', 'auth:sanctum'])->group(function() {
+
+    Route::prefix('workshop')->group(function() {
+        Route::get('/', [MasterWorkshopController::class, 'index']);
+        Route::post('/store', [MasterWorkshopController::class, 'store']);
+        Route::put('/update', [MasterWorkshopController::class, 'update']);
+    });
+
+    Route::apiResource('service', MasterServiceController::class);
 });

@@ -3,71 +3,78 @@
 namespace App\Http\Controllers\API\Master;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateWorkshopRequest;
+use App\Http\Requests\StoreWorkshopRequest;
 use App\Models\Workshop;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class WorkshopController extends Controller
 {
-    public function index()
+    /**
+     * Index
+     * Выводит мастерскую.
+     *
+     * @return JsonResponse
+     */
+    public function index() : JsonResponse
     {
         $workshop = Auth::user()->workshop;
         return response()->json(['data' => $workshop]);
     }
 
-    public function store(Request $request, Workshop $workshop)
+    /**
+     * Store
+     * Создание мастерской.
+     *
+     * @param StoreWorkshopRequest $request
+     * @param Workshop $workshop
+     * @return JsonResponse
+     */
+    public function store(StoreWorkshopRequest $request, Workshop $workshop) : JsonResponse
     {
         if (Auth::user()->workshop) {
             return response()->json(['У пользователя есть мастерская.'], 401);
         }
 
-        $request->validate([
-            'city' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'description' => 'required|string',
-            'cover' => 'required|image',
-            'phone' => 'required|string|max:11',
-        ]);
+        $validated = $request->all();
 
-        $input = $request->all();
-
-        if ($file = $request->file('cover')) {
-            $path = $file->store('public');
+        if ($request->file('cover')) {
+            $path = Storage::put('public', $request->file('cover'));
             $url = Storage::url($path);
-            $input['cover'] = $url;
+            $validated['cover'] = $url;
         }
 
-        $input['user_id'] = Auth::id();
+        $validated['user_id'] = Auth::id();
 
-        $workshop->fill($input)->save();
+        $workshop->fill($validated)->save();
 
         return response()->json([
             'data' => $workshop,
         ]);
     }
 
-    public function update(Request $request)
+    /**
+     * Update
+     * Обновление мастерской.
+     *
+     * @param UpdateWorkshopRequest $request
+     * @return JsonResponse
+     */
+    public function update(UpdateWorkshopRequest $request) : JsonResponse
     {
         $workshop = Auth::user()->workshop;
 
-        $request->validate([
-            'city' => 'string|max:255',
-            'address' => 'string|max:255',
-            'description' => 'string',
-            'cover' => 'image',
-            'phone' => 'string|max:11',
-        ]);
+        $validated = $request->all();
 
-        $input = $request->all();
-
-        if ($file = $request->file('cover')) {
-            $path = $file->store('public');
+        if ($request->file('cover')) {
+            $path = Storage::put('public', $request->file('cover'));
             $url = Storage::url($path);
-            $input['cover'] = $url;
+            $validated['cover'] = $url;
         }
 
-        $workshop->fill($input)->save();
+        $workshop->fill($validated)->save();
 
         return response()->json([
             'data' => $workshop,

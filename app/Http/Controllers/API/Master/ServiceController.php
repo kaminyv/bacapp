@@ -3,83 +3,88 @@
 namespace App\Http\Controllers\API\Master;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Service;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ServiceResource;
 
 class ServiceController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Index
+     * выводит услуги мастерской.
      *
-     * @return \Illuminate\Http\Response
+     * @return ResourceCollection
      */
-    public function index()
+    public function index(): ResourceCollection
     {
-        //
+        return ServiceResource::collection(
+            Auth::user()->workshop->service
+        );
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store
+     * создает новую услугу.
      *
-     * @return \Illuminate\Http\Response
+     * @param  StoreServiceRequest $request
+     * @return ServiceResource
      */
-    public function create()
+    public function store(StoreServiceRequest $request) : ServiceResource
     {
-        //
+        $validated = $request->validated();
+        $validated['workshop_id'] = Auth::user()->workshop->id;
+
+        $service = new Service();
+        $service->fill($validated)->save();
+
+        return new ServiceResource($service);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show
+     * выводит услугу по id.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Service $service
+     * @return ServiceResource
      */
-    public function store(Request $request)
+    public function show(Service $service) : ServiceResource
     {
-        //
+        return new ServiceResource($service);
     }
 
     /**
-     * Display the specified resource.
+     * Update
+     * обновляет услугу по id.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  UpdateServiceRequest $request
+     * @param  Service $service
+     * @return ServiceResource
      */
-    public function show($id)
+    public function update(UpdateServiceRequest $request, Service $service) : ServiceResource
     {
-        //
+        $validated = $request->validated();
+
+        $service->fill($validated)->save();
+
+        return new ServiceResource($service);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Destroy
+     * удаление услуги.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Service $service
+     * @return JsonResponse
+     * @throws \Throwable
      */
-    public function edit($id)
+    public function destroy(Service $service) : JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json([
+            'message' => $service->deleteOrFail(),
+        ]);
     }
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import BacappApi from '../../api/BacappApi'
-import Footer from '../catalogs/Footer'
 
 const Registre = () => {
     const [user, setUser] = useState({ name: '', email: '', password: '', is_master: '0' })
@@ -23,7 +22,7 @@ const Registre = () => {
         setUser({ name: '', email: '', password: '', is_master: '0' })
     };
     return (<>
-        <Card className='p-5'>
+        <Card className='p-5 m-auto w-50'>
             <h2 className='m-auto'>Регистрация:</h2>
             <Form className='mt-3 container d-flex flex-column'>
                 <Form.Group className='mb-3' controlId='name'>
@@ -64,7 +63,6 @@ const Registre = () => {
                 <Button onClick={rememberLogin} className="mx-3 " variant="secondary" type='submit'>Зарегистрируйтесь </Button>
             </Form>
         </Card>
-        <Footer />
     </>
     )
 }

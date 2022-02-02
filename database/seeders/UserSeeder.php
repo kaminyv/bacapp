@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'remember_token' => Str::random(10),
                 'phone' => '79991234567',
-                'avatar' => $faker->image('public/storage',640,480, null, false),
+                'avatar' => '/storage/'.$faker->image('public/storage',640,480, null, false),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

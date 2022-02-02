@@ -9,6 +9,15 @@ class Workshop extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'city',
+        'address',
+        'description',
+        'cover',
+        'phone',
+    ];
+
     /**
      * Получить услуги
      */

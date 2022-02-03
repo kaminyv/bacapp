@@ -6,6 +6,11 @@ export default class BacappApi {
         // console.log(responce.data);
         return responce.data;
     }
+    static async getMaster(id) {
+        const responce = await axios.get('/api/catalog/' + id)
+        // console.log(responce.data);
+        return responce.data;
+    }
     static postRegistre(user) {
         const register =  axios.post(
             '/api/auth/register',

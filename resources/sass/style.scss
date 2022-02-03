@@ -8,3 +8,42 @@
     max-width: 320px;
     max-height: 240px;
 }
+.master {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 40% 1fr;
+    &__wrap {
+        grid-column: 1/2;
+    }
+    .mastercard {
+        grid-column: 2/3;
+    }
+}
+.master__img {
+    max-width: 160px;
+    max-height: 120px;
+}
+.servece__list {
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    align-items: stretch;
+}
+.form {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    &__search {
+        margin-right: 5px;
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        width: 50%;
+        height: 45px;
+    }
+    &__style {
+        width: 50%;
+        height: 45px;
+    }
+}

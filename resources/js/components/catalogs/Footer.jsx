@@ -7,10 +7,13 @@ const Footer = () => {
         <Container
             fluid
             as="footer"
-            className="d-flex justify-content-center my-4 bg-dark text-white"
+            className="bg-dark text-white p-3 text-center"
         >
-            <Link to="/" className="link-light text-decoration-none"
-                variant='secondary'>Beauty & Clients &copy; 2022</Link>
+            <Link to="/"
+                className="link-light text-decoration-none"
+                variant='secondary'>
+                Beauty & Clients &copy; 2022
+            </Link>
         </Container>)
 }
 export default Footer

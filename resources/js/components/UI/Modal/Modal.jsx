@@ -1,22 +1,27 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import Login from '../../pages/Login';
 
-const Modals = (props) => {
+const Modals = ({ children, modal, setModal }) => {
+    const handleClose = () => setModal(false);
+    const handleShow = () => setModal(true);
     return (
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Body>
-                <Login />
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="dark" onClick={props.onHide}>Закрыть</Button>
-            </Modal.Footer>
-        </Modal>
+        <>
+            <Button
+                className='mx-2'
+                variant='secondary'
+                onClick={handleShow}>
+                Вход
+            </Button>
+
+            <Modal show={modal} onHide={handleClose} animation={false}>
+                <Modal.Body> {children}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Закрыть
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 }
 export default Modals

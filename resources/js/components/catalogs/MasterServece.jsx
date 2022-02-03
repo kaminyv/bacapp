@@ -1,16 +1,16 @@
 import React from 'react';
 import { ListGroup, Button } from 'react-bootstrap';
 
-const CatalogServece = (props) => {
+const MasterServece = (props) => {
     // console.log(props)
     return (
-        <ListGroup as='ul' className='service__list'>
+        <ListGroup as='ul' className='servece__list'>
             {props.service.map(services =>
-                <ListGroup.Item as='li' key={services.id} action variant="dark" className='service__item'>
-                    <p><strong>Наменование услуги</strong></p>
-                    <p>{services.name}</p>
-                    <p><strong>Стоимость:</strong></p>
-                    <p className='d-flex align-items-center'>{services.price}
+                <ListGroup.Item as='li' key={services.id} action variant="dark" className='d-grid'>
+                    <span><strong>Услуга:</strong></span>
+                    <span>{services.name}</span>
+                    <span><strong>Стоимость:</strong></span>
+                    <span className='d-flex align-items-center'>{services.price}
                         <svg className='mx-1'
                             width='16'
                             height='16'
@@ -28,13 +28,13 @@ const CatalogServece = (props) => {
                                 stroke='#212529'
                             />
                         </svg>
-                    </p>
-                    <p><strong>Свободное время</strong></p>
-                    <p>{services.time}</p>
+                    </span>
+                    <span><strong>Время:</strong></span>
+                    <span>{services.time}</span>
                     <Button variant='light'>Записаться</Button>
                 </ListGroup.Item>
             )}
         </ListGroup>
     );
 };
-export default CatalogServece;
+export default MasterServece;

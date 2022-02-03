@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { Form, Button, Card, Row } from 'react-bootstrap'
 import BacappApi from '../../api/BacappApi'
 import { Link } from "react-router-dom";
-import Footer from '../catalogs/Footer';
-const Login = () => {
+
+const Login = ({ modal, setModal }) => {
+    const handleClose = () => setModal(false);
     const [user, setUser] = useState({ email: '', password: '' })
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -44,13 +45,16 @@ const Login = () => {
                 </Form.Group>
                 <Row className='my-3'>
                     <div>Нет аккаунта?
-                        <Link to="/registre" className="link-success px-3">Зарегистрируйтесь</Link>
+                        <Link to="/registre"
+                            className="link-success px-3"
+                            onClick={handleClose}
+                        >Зарегистрируйтесь</Link>
                     </div>
                 </Row>
                 <Button onClick={signIn} className="mx-3 " variant="secondary" type='submit'> Войти </Button>
             </Form>
         </Card>
-        <Footer />
+
     </>
     )
 }

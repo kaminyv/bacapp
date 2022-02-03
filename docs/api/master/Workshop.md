@@ -24,7 +24,7 @@
 }
 ```
 
-## */api/master/workshop/store*
+## */api/master/workshop*
 Создание мастерской.
 
 **Type:** *POST*
@@ -75,8 +75,8 @@ axios(config)
 }
 ```
 
-## */api/master/workshop/update*
-Изменение данных мастерской.
+## */api/master/workshop*
+Изменение мастерской.
 
 **Type:** *POST*
 

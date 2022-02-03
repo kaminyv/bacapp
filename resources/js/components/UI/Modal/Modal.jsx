@@ -16,7 +16,7 @@ const Modals = ({ children, modal, setModal }) => {
             <Modal show={modal} onHide={handleClose} animation={false}>
                 <Modal.Body> {children}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant='secondary' onClick={handleClose}>
                         Закрыть
                     </Button>
                 </Modal.Footer>

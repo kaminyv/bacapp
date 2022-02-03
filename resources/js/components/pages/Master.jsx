@@ -30,7 +30,7 @@ const Master = () => {
 
 
     return (
-        <Container fluid as="section" className='master'>
+        <Container fluid as='section' className='master'>
             {workshopError &&
                 <h1>Произошла ошибка ${workshopError}</h1>
             }

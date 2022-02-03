@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const CatalogItem = (props) => {
     const history = useNavigate();
     return (
-        <ListGroup.Item as="li">
+        <ListGroup.Item as='li'>
             <Card bg='dark' text='white'>
                 <Card.Img className='catalog__img'
                     variant='top'

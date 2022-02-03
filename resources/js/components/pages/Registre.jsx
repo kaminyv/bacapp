@@ -32,35 +32,35 @@ const Registre = () => {
                         onChange={handleInput}
                         name='name'
                         type='text'
-                        placeholder="Введите имя"
+                        placeholder='Введите имя'
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="email">
+                <Form.Group className='mb-3' controlId='email'>
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
                         value={user.email}
                         onChange={handleInput}
                         name='email'
-                        type="email"
-                        placeholder="Введите email" />
+                        type='email'
+                        placeholder='Введите email' />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="password">
+                <Form.Group className='mb-3' controlId='password'>
                     <Form.Label>Пароль:</Form.Label>
                     <Form.Control
                         value={user.password}
                         onChange={handleInput}
                         name='password'
-                        type="password"
-                        placeholder="Введите пароль" />
+                        type='password'
+                        placeholder='Введите пароль' />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="checkbox">
+                <Form.Group className='mb-3' controlId='checkbox'>
                     <Form.Check
                         name='checkbox'
-                        type="checkbox"
+                        type='checkbox'
                         onChange={handleCheckbox}
-                        label="Я мастер" />
+                        label='Я мастер' />
                 </Form.Group>
-                <Button onClick={rememberLogin} className="mx-3 " variant="secondary" type='submit'>Зарегистрируйтесь </Button>
+                <Button onClick={rememberLogin} className='mx-3 ' variant='secondary' type='submit'>Зарегистрируйтесь </Button>
             </Form>
         </Card>
     </>

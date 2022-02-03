@@ -6,7 +6,7 @@ const MasterServece = (props) => {
     return (
         <ListGroup as='ul' className='servece__list'>
             {props.service.map(services =>
-                <ListGroup.Item as='li' key={services.id} action variant="dark" className='d-grid'>
+                <ListGroup.Item as='li' key={services.id} action variant='dark' className='d-grid'>
                     <span><strong>Услуга:</strong></span>
                     <span>{services.name}</span>
                     <span><strong>Стоимость:</strong></span>

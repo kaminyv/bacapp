@@ -38,7 +38,7 @@ const Master = () => {
                 ? <h1>Идеет загрузка...</h1>
                 : <>
                     <div className='master__wrap'>
-                        <img className='master__img' src={`/storage/${workshop.cover}`} />
+                        <img className='master__img' src={`${workshop.cover}`} />
                         <p>Салон</p>
                         <p>Город: <strong>{workshop.city}</strong></p>
                         <p>Адрес: <strong>{workshop.address}</strong></p>

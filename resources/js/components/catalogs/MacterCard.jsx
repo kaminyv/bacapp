@@ -7,7 +7,7 @@ const MacterCard = (props) => {
         <Card border="info" className='flex-row my-2 align-items-center mastercard'>
             <Card.Img className='catalog__img'
                 variant='top'
-                src={`/storage/${props.master.avatar}`} />
+                src={`${props.master.avatar}`} />
             <Card.Body className='d-grid gap-3'>
                 <Card.Title>Мастер {props.master.name}</Card.Title>
                 <Card.Text as='span'>

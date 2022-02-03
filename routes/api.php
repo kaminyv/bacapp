@@ -48,8 +48,8 @@ Route::prefix('master')->middleware(['isMaster', 'auth:sanctum'])->group(functio
 
     Route::prefix('workshop')->group(function() {
         Route::get('/', [MasterWorkshopController::class, 'index']);
-        Route::post('/store', [MasterWorkshopController::class, 'store']);
-        Route::put('/update', [MasterWorkshopController::class, 'update']);
+        Route::post('/', [MasterWorkshopController::class, 'store']);
+        Route::put('/', [MasterWorkshopController::class, 'update']);
     });
 
     Route::apiResource('service', MasterServiceController::class);

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import BacappApi from '../../api/BacappApi'
+import { useNavigate } from 'react-router-dom'
 
 const Registre = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState({ name: '', email: '', password: '', is_master: '0' })
     const handleInput = (e) => {
         const { name, value } = e.target
@@ -19,6 +21,17 @@ const Registre = () => {
     const rememberLogin = (e) => {
         e.preventDefault();
         BacappApi.postRegistre(user)
+            .then(value => {
+                // выполнение
+                localStorage.setItem("userYou", JSON.stringify(value))
+                let userYou = localStorage.getItem('userYou');
+                console.log('userYou:', JSON.parse(userYou));
+                navigate(`/user`)
+                // console.log(value.data.token)
+            }, reason => {
+                // отклонение
+                navigate(`/`)
+            })
         setUser({ name: '', email: '', password: '', is_master: '0' })
     };
     return (<>
@@ -32,35 +45,35 @@ const Registre = () => {
                         onChange={handleInput}
                         name='name'
                         type='text'
-                        placeholder="Введите имя"
+                        placeholder='Введите имя'
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="email">
+                <Form.Group className='mb-3' controlId='email'>
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
                         value={user.email}
                         onChange={handleInput}
                         name='email'
-                        type="email"
-                        placeholder="Введите email" />
+                        type='email'
+                        placeholder='Введите email' />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="password">
+                <Form.Group className='mb-3' controlId='password'>
                     <Form.Label>Пароль:</Form.Label>
                     <Form.Control
                         value={user.password}
                         onChange={handleInput}
                         name='password'
-                        type="password"
-                        placeholder="Введите пароль" />
+                        type='password'
+                        placeholder='Введите пароль' />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="checkbox">
+                <Form.Group className='mb-3' controlId='checkbox'>
                     <Form.Check
                         name='checkbox'
-                        type="checkbox"
+                        type='checkbox'
                         onChange={handleCheckbox}
-                        label="Я мастер" />
+                        label='Я мастер' />
                 </Form.Group>
-                <Button onClick={rememberLogin} className="mx-3 " variant="secondary" type='submit'>Зарегистрируйтесь </Button>
+                <Button onClick={rememberLogin} className='mx-3 ' variant='secondary' type='submit'>Зарегистрируйтесь </Button>
             </Form>
         </Card>
     </>

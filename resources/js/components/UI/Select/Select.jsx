@@ -5,11 +5,11 @@ const Select = ({ options, defaultValue, value, onChange }) => {
     return (
         <Form.Select
             className='form__style'
-            size="lg"
+            size='lg'
             value={value}
             onChange={event => onChange(event.target.value)}
         >
-            <option value="" disabled>
+            <option value='' disabled>
                 {defaultValue}
             </option>
             {options.map((option) => (

@@ -1,15 +1,18 @@
 import React from 'react';
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const MacterCard = (props) => {
-    console.log(props)
+    // console.log(props)
+    const navigate = useNavigate();
+
     return (
-        <Card border="info" className='flex-row my-2 align-items-center mastercard'>
+        <Card border='info' className=' my-2 align-items-center mastercard'>
             <Card.Img className='catalog__img'
                 variant='top'
-                src={`/storage/${props.master.avatar}`} />
+                src={`${props.master.avatar}`} />
             <Card.Body className='d-grid gap-3'>
-                <Card.Title>Мастер {props.master.name}</Card.Title>
+                <Card.Title> {props.master.name}</Card.Title>
                 <Card.Text as='span'>
                     <svg
                         className='mx-1'
@@ -25,15 +28,21 @@ const MacterCard = (props) => {
                 <Card.Text as='span'>
                     <svg
                         className='mx-1'
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        viewBox="0 0 16 16">
-                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='16'
+                        height='16'
+                        fill='currentColor'
+                        viewBox='0 0 16 16'>
+                        <path d='M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z' />
                     </svg>
                     {props.master.email}
                 </Card.Text>
+                <Button
+                    onClick={() => navigate(`/master/${props.master.id}`)}
+                    className='my-3 '
+                    variant='secondary' >
+                    Посмотреть услуги мастера
+                </Button>
             </Card.Body>
         </Card>
     )

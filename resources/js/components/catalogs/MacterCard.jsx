@@ -1,15 +1,18 @@
 import React from 'react';
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const MacterCard = (props) => {
     // console.log(props)
+    const navigate = useNavigate();
+
     return (
-        <Card border='info' className='flex-row my-2 align-items-center mastercard'>
+        <Card border='info' className=' my-2 align-items-center mastercard'>
             <Card.Img className='catalog__img'
                 variant='top'
                 src={`${props.master.avatar}`} />
             <Card.Body className='d-grid gap-3'>
-                <Card.Title>Мастер {props.master.name}</Card.Title>
+                <Card.Title> {props.master.name}</Card.Title>
                 <Card.Text as='span'>
                     <svg
                         className='mx-1'
@@ -34,6 +37,12 @@ const MacterCard = (props) => {
                     </svg>
                     {props.master.email}
                 </Card.Text>
+                <Button
+                    onClick={() => navigate(`/master/${props.master.id}`)}
+                    className='my-3 '
+                    variant='secondary' >
+                    Посмотреть услуги мастера
+                </Button>
             </Card.Body>
         </Card>
     )

@@ -10,9 +10,8 @@ const Modals = ({ children, modal, setModal }) => {
                 className='mx-2'
                 variant='secondary'
                 onClick={handleShow}>
-                Вход
+                Вход / Регистрация
             </Button>
-
             <Modal show={modal} onHide={handleClose} animation={false}>
                 <Modal.Body> {children}</Modal.Body>
                 <Modal.Footer>

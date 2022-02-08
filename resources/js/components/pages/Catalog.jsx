@@ -9,7 +9,7 @@ import { useFetching } from '../../hooks/useFetching'
 import { getPage, getPagesArray } from '../../utils/pages'
 import Pagination from '../UI/Pagination/Pagination'
 
-const Main = () => {
+const Catalog = () => {
     const [catalogs, setCatalogs] = useState([])
     const [filter, setFilter] = useState({ sort: '', query: '' });
     const [totalPage, setTotalPage] = useState(0)
@@ -17,41 +17,37 @@ const Main = () => {
     const [page, setPage] = useState(1)
     const sortedSeachedCatalag = useCatalog(catalogs, filter.sort, filter.query)
 
-
     useEffect(() => {
         fetchCatalog()
     }, [page])
+
     const [fetchCatalog, isLoading, catalogError] = useFetching(async () => {
-        const responce = await BacappApi.getAll(page, per_page)
+        const responce = await BacappApi.getCatalog(page, per_page)
         setCatalogs(responce.data)
         const totalWorkshop = responce.meta.total
         setTotalPage(getPage(totalWorkshop, per_page))
     })
+
     const changePage = (page) => {
         setPage(page)
-
     }
-    // const [fetchCatalog, isLoading, catalogError] = useFetching(async () => {
-    //     const responce = await BacappApi.getAll()
-    //     setCatalogs(responce.data)
-    // })
 
     return (<>
         <Container fluid as='main'>
             <CatalogFilter filter={filter} setFilter={setFilter} />
             {catalogError &&
-                <h1>Произошла ошибка ${catalogError}</h1>
+                <h1>Произошла ошибка ${catalogError} </h1>
             }
             {isLoading
                 ? <h1>Идеет загрузка...</h1>
                 : <CatalogList title={'Салоны красоты'} catalogs={sortedSeachedCatalag} />
-            }</Container>
+            }
+        </Container>
         <Pagination
             page={page}
             totalPage={totalPage}
             changePage={changePage}
         />
-
     </>)
 }
-export default Main
+export default Catalog

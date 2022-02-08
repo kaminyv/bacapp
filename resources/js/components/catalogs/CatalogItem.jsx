@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 const CatalogItem = (props) => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     return (
         <ListGroup.Item as='li'>
             <Card bg='dark' text='white'>
@@ -12,7 +12,7 @@ const CatalogItem = (props) => {
                     variant='top'
                     src={`${props.catalog.cover}`} />
                 <Card.Body >
-                    {/* <Card.Title>
+                    <Card.Title>
                         <svg
                             className='mx-2'
                             xmlns='http://www.w3.org/2000/svg'
@@ -24,7 +24,7 @@ const CatalogItem = (props) => {
                             <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z' />
                         </svg>
                         {props.catalog.master.name}
-                    </Card.Title> */}
+                    </Card.Title>
                     <Card.Text as='span'>
                         <svg
                             className='mx-2'
@@ -60,10 +60,11 @@ const CatalogItem = (props) => {
                         {props.catalog.rating}
                     </Card.Text>
                     <Button
-                        onClick={() => history(`/master/${props.catalog.id}`)}
+                        onClick={() => navigate(`/catalog/${props.catalog.id}`)}
+                        //catalog/{workshop}*- id мастерской.
                         variant='secondary'
                         className=' mx-2'>
-                        Смотреть предложение
+                        На страницу салона
                     </Button>
                 </Card.Body>
             </Card>

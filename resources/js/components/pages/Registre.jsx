@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import BacappApi from '../../api/BacappApi'
+import { useNavigate } from 'react-router-dom'
 
 const Registre = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState({ name: '', email: '', password: '', is_master: '0' })
     const handleInput = (e) => {
         const { name, value } = e.target
@@ -19,6 +21,17 @@ const Registre = () => {
     const rememberLogin = (e) => {
         e.preventDefault();
         BacappApi.postRegistre(user)
+            .then(value => {
+                // выполнение
+                localStorage.setItem("userYou", JSON.stringify(value))
+                let userYou = localStorage.getItem('userYou');
+                console.log('userYou:', JSON.parse(userYou));
+                navigate(`/user`)
+                // console.log(value.data.token)
+            }, reason => {
+                // отклонение
+                navigate(`/`)
+            })
         setUser({ name: '', email: '', password: '', is_master: '0' })
     };
     return (<>
